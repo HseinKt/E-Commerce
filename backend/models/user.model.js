@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
         required: true,
         minlength: 6,
         select: false, // Exclude password from queries by default
-        match: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{6,}$/,
+        // match: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{6,}$/,
     },
     role: {
         type: String,

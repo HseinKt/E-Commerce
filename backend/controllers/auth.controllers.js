@@ -5,14 +5,16 @@ const generateToken = (user) => {
     return jwt.sign(
         { id:user._id, role:user.role},
         process.env.JWT_SECRET,
-        { expireIn: '7d' }
+        { expiresIn: '30d' }
     )
 }
 
 exports.register = async (req, res) => {
-    const { name, email, password, role } = req.body;
 
+    console.log('Registering user:');
     try {
+        const { name, email, password, role } = req.body;
+
         const existingUser = await User.findOne({ email });
         if (existingUser) return res.status(400).json({ 
             message: 'User already exists' 
@@ -34,26 +36,33 @@ exports.register = async (req, res) => {
             user: newUser
         })
     } catch (error) {
-        res.status(500).json({ message: 'Server error' });   
+        console.error('Error registering user:', error); 
+        res.status(500).json({ message: 'Server error REGISTER USER' });  
     }
 }
 
 exports.login = async (req, res) => {
-    const { email, password } = req.body;
-
+    console.log('Logging in user:');
     try {
-        const user = await User.findOne({ email });
-        if (!user) return res.status(404).jason({
-            message: 'Invalid Credentials'
-        })
+        const { email, password } = req.body;
+    console.log('1');
 
-        const isMatch = await user.matchpassword(password);
-        if(!isMatch) return res.status(404).jason({
+        const user = await User.findOne({ email }).select('+password');
+        if (!user) return res.status(404).json({
             message: 'Invalid Credentials'
         })
+    console.log('2 - User found:', user);
+
+        const isMatch = await user.matchPassword(password);
+        if(!isMatch) return res.status(404).json({
+            message: 'Invalid Credentials'
+        })
+        else console.log('3 - Password matched');
 
         const token = generateToken(user);
         const { password: _, ...userData } = user.toJSON();
+
+    console.log('4 - Token generated:', token);
 
         res.status(200).json({
             message: 'Login successful',
@@ -62,6 +71,6 @@ exports.login = async (req, res) => {
         })
 
     } catch (error) {
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: 'Server error LOGIN USER' });
     }
 }
