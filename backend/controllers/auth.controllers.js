@@ -29,7 +29,7 @@ exports.register = async (req, res) => {
         // Save the user to the database
         await user.save();
 
-        const { password: _, ...newUser } = user.toJSON();
+        const { password: _, ...newUser } = user.toJSON(); //convert Mongoose doc to plain object
 
         res.status(201).json({ 
             message: 'User registered successfully',
@@ -45,24 +45,19 @@ exports.login = async (req, res) => {
     console.log('Logging in user:');
     try {
         const { email, password } = req.body;
-    console.log('1');
 
         const user = await User.findOne({ email }).select('+password');
         if (!user) return res.status(404).json({
             message: 'Invalid Credentials'
         })
-    console.log('2 - User found:', user);
 
         const isMatch = await user.matchPassword(password);
         if(!isMatch) return res.status(404).json({
             message: 'Invalid Credentials'
         })
-        else console.log('3 - Password matched');
 
         const token = generateToken(user);
         const { password: _, ...userData } = user.toJSON();
-
-    console.log('4 - Token generated:', token);
 
         res.status(200).json({
             message: 'Login successful',
