@@ -1,5 +1,3 @@
-// Reusable functions (auth, validation) for Secure or validate requests
-
 const jwt = require('jsonwentoken');
 
 exports.authMiddleware = async (req, res, next) => {
