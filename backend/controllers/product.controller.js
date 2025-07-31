@@ -3,6 +3,22 @@
 const Product = require('../models/product.model');
 const Category = require('../models/category.model');
 
+exports.getAllProducts = async (req, res) => {
+    console.log('Fetching all products:');
+    
+    try {
+        const products = await Product.find().populate('category');
+        
+        res.status(200).json({
+            message: 'Products fetched successfully',
+            products: products
+        })
+    } catch (error) {
+        console.error('Error fetching products:', error);
+        res.status(500).json({ message: 'Server error FETCHING PRODUCTS' });
+    }
+}
+
 exports.createProduct = async (req, res) => {
     console.log('Creating product:');
 
@@ -85,7 +101,7 @@ exports.deleteProduct = async (req, res) => {
         if (!product) return res.status(404).json({
             message: 'Product not found'
         })
-        
+
         res.status(200).json({
             message: 'Product deleted successfully',
         })
