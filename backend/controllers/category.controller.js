@@ -20,7 +20,7 @@ exports.getCategoryById = async (req, res) => {
     console.log('Fetching category by ID:');
 
     try {
-        const { id } = req.params.id;
+        const { id } = req.params;
         const category = await Category.findById(id);
 
         if (!category) return res.status(404).json({
@@ -68,7 +68,7 @@ exports.updateCategory = async (req, res) => {
 
     try {
         const { name } = req.body;
-        const { id } = req.params.id;
+        const { id } = req.params;
 
         const category = await Category.findById(id);
         if( !category ) return res.status(404).json({
@@ -98,7 +98,7 @@ exports.deleteCategory = async (req, res) => {
     console.log('Deleting category:');
 
     try {
-        const { id } = req.params.id;
+        const { id } = req.params;
         const category = await Category.findByIdAndDelete(id);
 
         if (!category) return res.status(404).json({

@@ -23,7 +23,7 @@ exports.getProductById = async (req, res) => {
     console.log('Fetching product by ID:');
 
     try {
-        const { id } = req.params.id;
+        const { id } = req.params;
         const product = await Product.findById(id).populate('category');
 
         if (!product) return res.status(404).json({
@@ -81,7 +81,7 @@ exports.updateProduct = async (req, res) => {
 
     try {
         const { name, description, price, quantity, category, image } = req.body;
-        const { id } = req.params.id;
+        const { id } = req.params;
 
         const product = await Product.findById(id);
         if( !product ) return res.status(404).json({
@@ -116,7 +116,7 @@ exports.deleteProduct = async (req, res) => {
     console.log('Deleting product:');
 
     try {
-        const { id } = req.params.id;
+        const { id } = req.params;
         const product = await Product.findByIdAndDelete(id);
 
         if (!product) return res.status(404).json({
