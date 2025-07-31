@@ -16,6 +16,27 @@ exports.getAllCategories = async (req, res) => {
     }
 }
 
+exports.getCategoryById = async (req, res) => {
+    console.log('Fetching category by ID:');
+
+    try {
+        const { id } = req.params.id;
+        const category = await Category.findById(id);
+
+        if (!category) return res.status(404).json({
+            message: 'Category not found'
+        })
+
+        res.status(200).json({
+            message: 'Category fetched successfully',
+            category: category
+        })
+    } catch (error) {
+        console.error('Error fetching category by ID:', error);
+        res.status(500).json({ message: 'Server error FETCHING CATEGORY BY ID' });
+    }
+}
+
 exports.createCategory = async (req, res) => {
     console.log('Creating category:');
 
@@ -77,7 +98,7 @@ exports.deleteCategory = async (req, res) => {
     console.log('Deleting category:');
 
     try {
-        const { id } = req.params;
+        const { id } = req.params.id;
         const category = await Category.findByIdAndDelete(id);
 
         if (!category) return res.status(404).json({
