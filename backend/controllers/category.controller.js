@@ -1,5 +1,21 @@
 const Category = require('../models/category.model');
 
+exports.getAllCategories = async (req, res) => {
+    console.log('Fetching all categories:');
+
+    try {
+        const categories = await Category.find();
+
+        res.status(200).json({
+            message: 'Categories fetched successfully',
+            categories: categories
+        })
+    } catch (error) {
+        console.error('Error fetching categories:', error);
+        res.status(500).json({ message: 'Server error FETCHING CATEGORIES' });    
+    }
+}
+
 exports.createCategory = async (req, res) => {
     console.log('Creating category:');
 
