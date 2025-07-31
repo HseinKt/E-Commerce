@@ -1,4 +1,3 @@
-// Setup Express, middlewares 
 const express = require('express');
 const cors = require('cors');
 
@@ -9,6 +8,12 @@ app.use(cors());
 
 const authRoutes = require('./routes/auth.routes');
 app.use('/api/auth', authRoutes);
+
+const productRoutes = require('./routes/product.routes');
+app.use('/api', productRoutes);
+
+const categoryRoutes = require('./routes/category.routes');
+app.use('/api', categoryRoutes);
 
 // Example default route
 app.get('/', (_, res) => {
