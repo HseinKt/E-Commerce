@@ -43,21 +43,37 @@ exports.updateCategory = async (req, res) => {
             message: 'Category does not exist'
         })
 
-        product.name = name || product.name;
-        product.description = description || product.description;
-        product.price = price || product.price;
-        product.quantity = quantity || product.quantity;
-        product.category = category || product.category;
-        product.image = image || product.image;
+        category.name = name || category.name;
 
-        const updateProduct = await product.save();
+        const updateCategory = await category.save();
 
         res.status(201).json({
-            message: 'Product Updated successfully',
-            product: updateProduct
+            message: 'Category Updated successfully',
+            Category: updateCategory
         })
     } catch (error) {
         console.error('Error updating category:', error);
         res.status(500).json({ message: 'Server error UPDATING CATEGORY' });
+    }
+}
+
+exports.deleteCategory = async (req, res) => {
+    console.log('Deleting category:');
+
+    try {
+        const { id } = req.params;
+        const category = await Category.findByIdAndDelete(id);
+
+        if (!category) return res.status(404).json({
+            message: 'Category not found'
+        })
+
+        res.status(200).json({
+            message: 'Category deleted successfully',
+            category: category
+        })
+    } catch (error) {
+        console.error('Error deleting category:', error);
+        res.status(500).json({ message: 'Server error DELETING CATEGORY' });
     }
 }
