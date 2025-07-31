@@ -5,19 +5,16 @@ exports.createCategory = async (req, res) => {
 
     try {
         const { name } = req.body;
-console.log('First Category name:', name);        
+
         const categoryExists = await Category.findOne({ name });
         if( categoryExists ) return res.status(400).json({
             message: 'Category already exists'
         })
 
-console.log('second Category name:', name);
         const newCategory = new Category ( {
             name
         } )
         await newCategory.save();
-
-                console.log('third NewCategory:', newCategory);
 
         res.status(200).json({
             message: 'Category created successfully',
