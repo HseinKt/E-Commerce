@@ -69,3 +69,20 @@ exports.login = async (req, res) => {
         res.status(500).json({ message: 'Server error LOGIN USER' });
     }
 }
+
+exports.getCurrentUser = async (req, res) => {
+
+    try {
+        const userId = req.user.id; // Assuming user ID is set in req.user by middleware
+        const user = await User.findById(userId).select('-password'); // Exclude password from response
+        if (!user) return res.status(404).json({ message: 'User not found' });
+
+        res.status(200).json({
+            message: 'Current user fetched successfully',
+            user: user
+        });
+    } catch (error) {
+        console.error('Error fetching current user:', error);
+        res.status(500).json({ message: 'Server error GET CURRENT USER' });    
+    }
+}
