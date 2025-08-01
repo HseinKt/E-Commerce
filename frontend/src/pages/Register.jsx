@@ -40,64 +40,66 @@ const Register = () => {
     }
     return ( 
         <div className="register-container">
-            <h1>Create an account</h1>
-            <form onSubmit={handleSubmit} className="form-template">
-                <div className="form-group">
-                    <label htmlFor="name">Name:</label>
-                    <input 
-                        type="text" 
-                        id="name" 
-                        name="name" 
-                        className="form-control"
-                        placeholder="Name"
-                        value={name} 
-                        onChange={(e) => setName(e.target.value)}
-                        required 
-                    />
-                </div>
-                <div className="form-group">    
-                    <label htmlFor="email">Email:</label>
-                    <input 
-                        type="email" 
-                        id="email" 
-                        name="email" 
-                        className="form-control"
-                        placeholder="Email"
-                        value={email} 
-                        onChange={(e) => setEmail(e.target.value)}
-                        required 
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="password">Password:</label>
-                    <input 
-                        type="password" 
-                        id="password" 
-                        name="password" 
-                        className="form-control"
-                        placeholder="Password"
-                        value={password} 
-                        onChange={(e) => setPassword(e.target.value)}
-                        required                     
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="password">Repeat password:</label>
-                    <input 
-                        type="password" 
-                        id="repeat_password" 
-                        name="repeat_password" 
-                        className="form-control"
-                        placeholder="Password"
-                        value={repeat_password} 
-                        onChange={(e) => setRepeat_password(e.target.value)}
-                        required                     
-                    />
-                </div>
-                
-                <button type="submit" className="btn_container">Register</button>
-                <p>Already have an account? <a href="/login">Login</a></p>
-            </form>
+            <div className="register-card">
+                <h2 className="register-title">Create an account</h2>
+                <form onSubmit={handleSubmit}>
+                    <div className="form-group">
+                        <label htmlFor="name">Name:</label>
+                        <input 
+                            type="text" 
+                            id="name" 
+                            name="name" 
+                            className="register-input"
+                            placeholder="Name"
+                            value={name} 
+                            onChange={(e) => setName(e.target.value)}
+                            required 
+                        />
+                    </div>
+                    <div className="form-group">    
+                        <label htmlFor="email">Email:</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            className="register-input"
+                            placeholder="Email"
+                            value={email} 
+                            onChange={(e) => setEmail(e.target.value)}
+                            required 
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="password">Password:</label>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            className="register-input"
+                            placeholder="Password"
+                            value={password} 
+                            onChange={(e) => setPassword(e.target.value)}
+                            required                     
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="password">Repeat password:</label>
+                        <input 
+                            type="password" 
+                            id="repeat_password" 
+                            name="repeat_password" 
+                            className="register-input"
+                            placeholder="Password"
+                            value={repeat_password} 
+                            onChange={(e) => setRepeat_password(e.target.value)}
+                            required                     
+                        />
+                    </div>
+                    
+                    <button type="submit" className="btn_container">Register</button>
+                    <p className="register-login-link">Already have an account? <a href="/login">Login</a></p>
+                </form>
+            </div>
         </div>
      );
 }
