@@ -22,8 +22,9 @@ const Login = () => {
                 navigate('/');
             })
             .catch((error) => {
-                console.error("Login error:", error);
-                alert("Login failed. Please check your credentials and try again.");
+                const errorMessage = error.response?.data?.message || "Login failed. Please try again.";
+                console.error(errorMessage);
+                alert(errorMessage);
             })
         } catch (error) {
             console.error("Error during login:", error);
