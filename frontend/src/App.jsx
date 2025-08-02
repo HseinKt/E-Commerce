@@ -8,7 +8,7 @@ import ProductDetails from './pages/ProductDetails';
 function App() {
 
   return (
-    <Router>      
+    <>      
       <Routes>
         <Route path='/' element={ <Home/> }/>
         <Route path='/login' element={ <Login/> }/>
@@ -16,7 +16,7 @@ function App() {
         <Route path='/products' element={ <Products/> }/>
         <Route path='/productDetails' element={ <ProductDetails/> }/>
       </Routes>
-    </Router>
+    </>
   )
 }
 

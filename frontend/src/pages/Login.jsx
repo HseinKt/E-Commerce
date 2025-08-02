@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import '../styles/Login_Register.css';
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
-    const navigate = useNavigate();
+    const { login } = useContext(AuthContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -16,10 +16,8 @@ const Login = () => {
         try {
             axios.post('http://localhost:8000/api/auth/login', formData)
             .then((response) => {
-                console.log("Login successful:", response.data);
-                localStorage.setItem('token', response.data.token);
-                alert("Login successful!");
-                navigate('/');
+                login(response.data.user, response.data.token);
+                alert("Login successful!"); 
             })
             .catch((error) => {
                 const errorMessage = error.response?.data?.message || "Login failed. Please try again.";

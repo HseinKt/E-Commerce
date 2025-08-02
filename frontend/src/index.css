@@ -4,6 +4,15 @@
   box-sizing: border-box;
 }
 
+:root {
+  --primary: #2E7D32;
+  --secondary: #A5D6A7;
+  --background: #FDFBF7;
+  --text: #333333;
+  --accent: #AED581;
+  --neutral: #8D6E63;
+}
+
 body {
     margin: 0;
     padding: 0;
