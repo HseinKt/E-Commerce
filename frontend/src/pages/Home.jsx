@@ -1,11 +1,29 @@
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import '../styles/Home.css';
 
 const Home = () => {
     return ( 
         <>
             <Navbar/>
-            <h1>Welcome to the Home Page</h1>
+        
+            <div className="home-container">
+                <h1>Welcome to the Rooted 🌿</h1>
+                <p>Your trusted source for healthy, organic food.</p>
+
+             <h1>Welcome to the Rooted 🌿</h1>
+                <p>Your trusted source for healthy, organic food.</p><h1>Welcome to the Rooted 🌿</h1>
+                <p>Your trusted source for healthy, organic food.</p><h1>Welcome to the Rooted 🌿</h1>
+                <p>Your trusted source for healthy, organic food.</p><h1>Welcome to the Rooted 🌿</h1>
+                <p>Your trusted source for healthy, organic food.</p><h1>Welcome to the Rooted 🌿</h1>
+                <p>Your trusted source for healthy, organic food.</p><h1>Welcome to the Rooted 🌿</h1>
+                <p>Your trusted source for healthy, organic food.</p><h1>Welcome to the Rooted 🌿</h1>
+                <p>Your trusted source for healthy, organic food.</p><h1>Welcome to the Rooted 🌿</h1>
+                <p>Your trusted source for healthy, organic food.</p><h1>Welcome to the Rooted 🌿</h1>
+                <p>Your trusted source for healthy, organic food.</p><h1>Welcome to the Rooted 🌿</h1>
+                <p>Your trusted source for healthy, organic food.</p>
+            </div>
+                
             <Footer/>
         </>
      );
