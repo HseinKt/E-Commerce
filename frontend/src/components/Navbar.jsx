@@ -23,33 +23,33 @@ const Navbar = () => {
     return ( 
         <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
             <div className='navbar-content'>
-                <img src="src/assets/logo2.png" alt="Logo" className="logo-image" />
+                <img src="src/assets/logo3.png" alt="Logo" className="logo-image" />
 
                 <div className='links'>
-                    <Link to="/" className='link'>Home</Link>
-                    <Link to="/products" className='link'>Products</Link>
+                    <Link to="/" className={`link ${scrolled ? 'scrolled_link' : ''}`}>Home</Link>
+                    <Link to="/products" className={`link ${scrolled ? 'scrolled_link' : ''}`}>Products</Link>
                 </div>
             </div>
 
             <div className='auth-links'>
                 {user?.role === 'admin' && (
                     <>
-                        <Link to="/admin/dashboard" className='link'>Dashboard</Link>
-                        <button className='logout-button' onClick={logout}>Logout</button>
+                        <Link to="/admin/dashboard" className={`link ${scrolled ? 'scrolled_link' : ''}`}>Dashboard</Link>
+                        <button className={`logout-button ${scrolled ? 'scrolled_button' : ''}`} onClick={logout}>Logout</button>
                     </>
                 )}
 
                 {!user && (
                     <>
-                        <Link to="/login" className='link'>Login</Link>
-                        <Link to="/register" className='link'>Register</Link>
+                        <Link to="/login" className={`link ${scrolled ? 'scrolled_link' : ''}`}>Login</Link>
+                        <Link to="/register" className={`link ${scrolled ? 'scrolled_link' : ''}`}>Register</Link>
                     </>
                 )}
 
                 {user?.role === 'user' && (
                     <>
                         <span className='user-greeting'>Hello, {user.name}</span>
-                        <button className='logout-button' onClick={logout}>Logout</button>
+                        <button className={`logout-button ${scrolled ? 'scrolled_button' : ''}`} onClick={logout}>Logout</button>
                     </>
                 )}
             </div>      

@@ -2,7 +2,7 @@
     position: fixed;
     top: 0;
     width: 100%;
-    padding: 20px;
+    padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -11,9 +11,9 @@
 }
 
 .scrolled {
-    background-color: var(--primary);
+    background-color: var(--background);
     backdrop-filter: blur(10px);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .navbar-content {
@@ -40,6 +40,10 @@
     color: #fff;
     text-decoration: none;
     font-size: 1.2rem;
+}
+
+.scrolled_link {
+    color: rgb(0, 0, 0);
 }
 
 .link:hover {
@@ -74,3 +78,14 @@
     background-color: var(--secondary);
     color: var(--text);
 }
+
+.scrolled_button {
+    color: #000000;
+    border: 1px solid #000000;
+}
+
+.scrolled_button:hover {
+    background-color: var(--text);
+    color: var(--background);
+}
+

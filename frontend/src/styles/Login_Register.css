@@ -1,14 +1,13 @@
-/* styles/Register.css */
-
 .register-container, .login-container {
+  min-height: 100vh; /* full screen height */
+  background: url(../assets/healthy2.jpg) no-repeat center center / cover;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
 
 .register-card, .login-card {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.75);
   padding: 40px;
   padding-right: 65px;    
   border-radius: 8px;
