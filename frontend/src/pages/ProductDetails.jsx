@@ -1,13 +1,14 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import '../styles/ProductDetails.css'
 
 const ProductDetails = () => {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const { token } = useContext(AuthContext);
-console.log("id:" , id);
+    const navigate = useNavigate();
 
     const fetchProduct = async () => {
         try {
@@ -36,28 +37,29 @@ console.log("id:" , id);
     useEffect(() => {
         fetchProduct();
     }, [id]);
-    
-    console.log("product after fetching:", product);
-    
+        
     return ( 
-        <div className="details-container">
+        <>
             {product && (
-                <>
-                <img src="/src/assets/Nuts2.png" alt={product.name} className="image"/>
+                <div className="details-container">
+                    <div className="details-image">
+                        <img src="/src/assets/Nuts1.jpg" alt={product.name} className="image"/>
+                    </div>
 
-                <div className="details">
-                    <h2>{product.name}</h2>
-                    <p className="description">{product.description}</p>
-                    <p className="price"><strong>Price:</strong> ${product.price.toFixed(2)}</p>
-                    <p className="quantity"><strong>In Stock:</strong> {product.quantity}</p>
-                    {product.category && 
-                        <p className="Category"><strong>Category:</strong> {product.category.name}</p>
-                    }
-                    <Link to="/" className="back">← Back to Products</Link>
+                    <div className="details">
+                        <h1 className="name">{product.name}</h1>
+                        {product.category && 
+                            <p className="Category"><strong>Category:</strong> {product.category.name}</p>
+                        }
+                        <p className="price"><strong>Price:</strong> ${product.price.toFixed(2)}</p>
+                        <p className="quantity"><strong>In Stock:</strong> {product.quantity}</p>
+                        <p className="description">{product.description}</p>
+
+                        <Link onClick={() => navigate(-1)} className="back">← Back</Link>
+                    </div>
                 </div>
-                </>
             )}
-        </div>
+        </>
      );
 }
  
