@@ -2,6 +2,7 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import '../styles/Products.css'
 
 const Products = () => {
     const { token, logout } = useContext(AuthContext);
@@ -43,15 +44,18 @@ const Products = () => {
 
     return ( 
         <div className="product-container">
-            <h2>Our Products</h2>
+            <h2>Bulk Whole Foods Online</h2>
 
             <div className="grid">
                 {products.map(product => (
-                <Link to={`/products/${product._id}`}>
-                    <div key={product._id} className="product-card">
-                        <img src={product.image} alt={product.name} className="product-image"/>
-                        <p className="product-price">{product.price}$</p>
+                <Link to={`/products/${product._id}`} className="product-link" key={product._id}>
+                    <div className="product-card">
+                        <img src="/src/assets/Nuts3.jpg" alt={product.name} className="product-image"/>
+                        <p className="product-price">${product.price}</p>
                         <h3 className="product-name">{product.name}</h3>
+                        <div className="stars">
+                            ★★★★★
+                        </div>
                     </div>
                 </Link>
                 ))}

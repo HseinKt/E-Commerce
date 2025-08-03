@@ -2,7 +2,8 @@
     position: fixed;
     top: 0;
     width: 100%;
-    padding: 10px;
+    padding-inline: 2rem;
+    padding-block: 0.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
