@@ -22,3 +22,12 @@ body {
     overflow-x: hidden;
     background: var(--background);
 }
+
+.user-greeting {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--accent);
+    letter-spacing: 0.5px;
+} 

@@ -1,10 +1,43 @@
-.footer {
-    margin-top: 'auto';
-    background: var(--text);
+.rooted-footer {
+    background-color: var(--text);
     color: #fff;
+    padding: 1.5rem 1rem;
     text-align: center;
-    padding: 1rem;
-    position: fixed;
-    bottom: 0;
-    width: 100%; 
+    margin-top: auto;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.social-icons a {
+    font-size: 1.2rem;
+    color: #fff;
+    background-color: rgba(255,255,255,0.15);
+    padding: 0.6rem;
+    padding-inline: 0.7rem;
+    margin-inline: 0.2rem;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+    background-color: #fff;
+    color: var(--primary);
+}
+
+.footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.copyright-span {
+    color: var(--secondary);
 }

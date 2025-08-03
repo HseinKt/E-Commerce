@@ -50,7 +50,7 @@ const Products = () => {
                 {products.map(product => (
                 <Link to={`/products/${product._id}`} className="product-link" key={product._id}>
                     <div className="product-card">
-                        <img src="/src/assets/Nuts3.jpg" alt={product.name} className="product-image"/>
+                        <img src="/src/assets/Nuts1.jpg" alt={product.name} className="product-image"/>
                         <p className="product-price">${product.price}</p>
                         <h3 className="product-name">{product.name}</h3>
                         <div className="stars">
