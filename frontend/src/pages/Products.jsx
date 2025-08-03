@@ -44,7 +44,7 @@ const Products = () => {
 
     return ( 
         <div className="product-container">
-            <h2>Bulk Whole Foods Online</h2>
+            <h2>Healthy eating</h2>
 
             <div className="grid">
                 {products.map(product => (

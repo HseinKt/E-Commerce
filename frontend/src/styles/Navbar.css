@@ -7,6 +7,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
     transition: background-color 0.5s ease;
     background-color: transparent;
 }
@@ -20,6 +21,7 @@
 .navbar-content {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     justify-content: space-between;
     gap: 40px;
 }
@@ -34,6 +36,7 @@
     display: flex;
     gap: 1rem;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .link {
@@ -55,6 +58,7 @@
     display: flex;
     gap: 1.5rem;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .user-greeting {
