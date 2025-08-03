@@ -57,6 +57,14 @@
     font-size: 1.2rem;
 }
 
+.back:hover {
+    transition: transform 0.2s ease-in-out ;
+    transform: translateY(-3px);
+    font-weight: 650;
+    color: var(--text);
+    text-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
 @media only screen and (max-width: 500px) {
     .details-container {
         display: flex;
