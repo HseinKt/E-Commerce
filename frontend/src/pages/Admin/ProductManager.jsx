@@ -104,8 +104,29 @@ const ProductManager = () => {
         setFormData({...formData, [e.target.name]: e.target.value });
     };
 
-    const handleDelete = async (e) => {
-
+    const handleDelete = async (id) => {
+        try {
+            axios.delete(`http://localhost:8000/api/products/${id}`,
+            {
+                headers:    
+                {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer '+ token
+                }
+            })
+            .then((response) => {
+                console.log("products deleted successfully", response.data);
+                setFormData({ name: '', description: '', price: '', quantity: '', category: '', image: ''})
+                fetchProducts();
+            })
+            .catch((error) => {
+                const errorMessage = error.response?.data?.message || "No data added, catch error";
+                console.log("errorMessage in catch axios", errorMessage);
+                alert( errorMessage);
+            })
+        } catch (error) {
+            console.error("Error during fetching:", error);
+        }
     };
 
     const handleUpdate = async (e) => {
