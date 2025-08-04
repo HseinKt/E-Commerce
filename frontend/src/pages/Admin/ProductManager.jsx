@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
+import '../../styles/ProductManager.css'
 
 const ProductManager = () => {
 
@@ -8,12 +9,15 @@ const ProductManager = () => {
     const [ categories, setCategories ] = useState([]);
     const [ products, setProducts ] = useState([]);
 
-    const [ name, setName ] = useState('');
-    const [ description, setDescription ] = useState('');
-    const [ price, setPrice ] = useState('');
-    const [ quantity, setQuantity ] = useState('');
-    const [ category, setCategory ] = useState('');
-    const [ image, setImage ] = useState('');
+    const [ formData, setFormData ] = useState({
+        name: '', description: '', price: '', quantity: '', category: '', image: ''
+    })
+    // const [ name, setName ] = useState('');
+    // const [ description, setDescription ] = useState('');
+    // const [ price, setPrice ] = useState('');
+    // const [ quantity, setQuantity ] = useState('');
+    // const [ category, setCategory ] = useState('');
+    // const [ image, setImage ] = useState('');
     
     const fetchCategories = async () => {
         try {
@@ -71,8 +75,6 @@ const ProductManager = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const formData = {name, description, price, quantity, category, image};
-
         try {
             axios.post("http://localhost:8000/api/products", formData,
             {
@@ -84,6 +86,9 @@ const ProductManager = () => {
             })
             .then((response) => {
                 console.log("products added successfully", response.data);
+                alert(response.data.message)
+                setFormData({ name: '', description: '', price: '', quantity: '', category: '', image: ''})
+                fetchProducts();
             })
             .catch((error) => {
                 const errorMessage = error.response?.data?.message || "No data added, catch error";
@@ -95,6 +100,18 @@ const ProductManager = () => {
         }
     }
 
+    const handleChange = (e) => {
+        setFormData({...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleDelete = async (e) => {
+
+    };
+
+    const handleUpdate = async (e) => {
+        
+    };
+
     return ( 
         <div className="admin-wrapper">
             <h2>Product Manager</h2>
@@ -102,13 +119,13 @@ const ProductManager = () => {
             <div className="admin-manager">
                 <form onSubmit={handleSubmit} className="admin-form">
                     <input type="text" name="name" placeholder="Name" required
-                        value={name} 
-                        onChange={(e) => setName(e.target.value)} 
+                        value={formData.name} 
+                        onChange={handleChange} 
                     />
 
                     <select type="text" name="category" placeholder="category" required
-                        value={category} 
-                        onChange={(e) => setCategory(e.target.value)}
+                        value={formData.category} 
+                        onChange={handleChange}
                     >
                         <option value="">select category</option>
                         {categories.map(cat => (
@@ -117,31 +134,60 @@ const ProductManager = () => {
                     </select>
 
                     <input type="text" name="price" placeholder="price" required
-                        value={price} 
-                        onChange={(e) => setPrice(e.target.value)} 
+                        value={formData.price} 
+                        onChange={handleChange} 
                     />
 
                     <input type="text" name="quantity" placeholder="quantity" required
-                        value={quantity} 
-                        onChange={(e) => setQuantity(e.target.value)}
+                        value={formData.quantity} 
+                        onChange={handleChange}
                     />
 
                     <textarea type="text" name="description" placeholder="description" required
-                        value={description} 
-                        onChange={(e) => setDescription(e.target.value)}
+                        value={formData.description} 
+                        onChange={handleChange}
                     />
 
                     <input type="text" name="image" placeholder="image" required
-                        value={image} 
-                        onChange={(e) => setImage(e.target.value)}
+                        value={formData.image} 
+                        onChange={handleChange}
                     />
                     
                     <button type="submit">Add</button>
                 </form>
 
-                {/* <table className="admin-table">
-                    table
-                </table> */}
+                <table className="admin-table">
+                    <thead>
+                        <tr>
+                            {/* <th>Preview</th> */}
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Qty</th>
+                            <th>Description</th>
+                            <th>Category</th>
+                            <th>⚙️</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {products.map(p => (
+                            <tr key={p._id}>
+                                <td>
+                                    <img src={p.image} alt={p.name} />
+                                    <div>{p.name}</div>
+                                </td>
+                                {/* <td>{p.name}</td> */}
+                                <td>${p.price}</td>
+                                <td>{p.quantity}</td>
+                                <td>{p.description}</td>
+                                <td>{p.category?.name}</td>
+                                <td>
+                                    <button onClick={() => handleDelete(p._id)}>🗑</button>
+                                    <button onClick={() => handleUpdate(p._id)}>Edit</button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
         </div>
      );
