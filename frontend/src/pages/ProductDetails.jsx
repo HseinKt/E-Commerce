@@ -21,7 +21,6 @@ const ProductDetails = () => {
                 }
             })
             .then((response) => {
-                console.log("product", response.data.product);
                 setProduct(response.data.product)
             })
             .catch((error) => {

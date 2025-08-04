@@ -4,7 +4,6 @@ const Product = require('../models/product.model');
 const Category = require('../models/category.model');
 
 exports.getAllProducts = async (req, res) => {
-    console.log('Fetching all products:');
     
     try {
         const products = await Product.find().populate('category');
@@ -20,7 +19,6 @@ exports.getAllProducts = async (req, res) => {
 }
 
 exports.getProductById = async (req, res) => {
-    console.log('Fetching product by ID:');
 
     try {
         const { id } = req.params;
@@ -41,7 +39,6 @@ exports.getProductById = async (req, res) => {
 }
 
 exports.createProduct = async (req, res) => {
-    console.log('Creating product:');
 
     try {
         const { name, description, price, quantity, category, image } = req.body;
@@ -77,7 +74,6 @@ exports.createProduct = async (req, res) => {
 }
 
 exports.updateProduct = async (req, res) => {
-    console.log('Updating product:');
 
     try {
         const { name, description, price, quantity, category, image } = req.body;
@@ -113,7 +109,6 @@ exports.updateProduct = async (req, res) => {
 }
 
 exports.deleteProduct = async (req, res) => {
-    console.log('Deleting product:');
 
     try {
         const { id } = req.params;

@@ -17,12 +17,10 @@ const Login = () => {
             axios.post('http://localhost:8000/api/auth/login', formData)
             .then((response) => {
                 login(response.data.user, response.data.token);
-                alert("Login successful!"); 
             })
             .catch((error) => {
                 const errorMessage = error.response?.data?.message || "Login failed. Please try again.";
                 console.error(errorMessage);
-                alert(errorMessage);
             })
         } catch (error) {
             console.error("Error during login:", error);

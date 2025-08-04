@@ -21,7 +21,6 @@ const Dashboard = () => {
                 }
             })
             .then((response) => {
-                console.log("fetch Stats", response.data);
                 setStats(response.data)
             })
             .catch((error) => {
@@ -37,8 +36,6 @@ const Dashboard = () => {
     useEffect(() => {
         if(!token) 
             logout();
-        else 
-            console.log("token:", token);
 
         fetchStats();
     },[])
@@ -66,7 +63,7 @@ const Dashboard = () => {
 
             <CategoryManager/>
 
-            {/* <ProductManager/> */}
+            <ProductManager/>
         </>
     );
 };

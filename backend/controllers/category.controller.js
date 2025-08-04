@@ -1,7 +1,6 @@
 const Category = require('../models/category.model');
 
 exports.getAllCategories = async (req, res) => {
-    console.log('Fetching all categories:');
 
     try {
         const categories = await Category.find();
@@ -17,7 +16,6 @@ exports.getAllCategories = async (req, res) => {
 }
 
 exports.getCategoryById = async (req, res) => {
-    console.log('Fetching category by ID:');
 
     try {
         const { id } = req.params;
@@ -38,7 +36,6 @@ exports.getCategoryById = async (req, res) => {
 }
 
 exports.createCategory = async (req, res) => {
-    console.log('Creating category:');
 
     try {
         const { name } = req.body;
@@ -64,7 +61,6 @@ exports.createCategory = async (req, res) => {
 }
 
 exports.updateCategory = async (req, res) => {
-    console.log('Updating category:');
 
     try {
         const { name } = req.body;
@@ -95,7 +91,6 @@ exports.updateCategory = async (req, res) => {
 }
 
 exports.deleteCategory = async (req, res) => {
-    console.log('Deleting category:');
 
     try {
         const { id } = req.params;

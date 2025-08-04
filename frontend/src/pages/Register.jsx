@@ -24,8 +24,6 @@ const Register = () => {
         try {
             axios.post('http://localhost:8000/api/auth/register', formData)
             .then((response) => {
-                console.log("Registration successful:", response.data);
-                alert("Registration successful! You can now log in.");
                 navigate('/login');
             })
             .catch((error) => {

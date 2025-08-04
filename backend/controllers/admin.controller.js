@@ -2,7 +2,6 @@ const Product = require('../models/product.model');
 const Category = require('../models/category.model');
 
 exports.getStats = async (req, res) => {
-    console.log('Fetching all products andCategories:');
 
     try {
         const totalProducts = await Product.countDocuments(); //SELECT COUNT(*) FROM products

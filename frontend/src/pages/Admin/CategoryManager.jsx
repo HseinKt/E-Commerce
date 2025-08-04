@@ -24,7 +24,6 @@ const CategoryManager = () => {
                 }
             })
             .then((response) => {
-                console.log("category", response.data.categories);
                 setCategories(response.data.categories)
             })
             .catch((error) => {
@@ -48,7 +47,6 @@ const CategoryManager = () => {
                 }
             })
             .then((response) => {
-                console.log("products", response.data.products);
                 setProducts(response.data.products)
             })
             .catch((error) => {
@@ -79,8 +77,6 @@ const CategoryManager = () => {
                 }
             })
             .then((response) => {
-                console.log("Categories added successfully", response.data);
-                alert(response.data.message)
                 setName('');
                 setEditingId(null);
                 fetchCategories();
@@ -106,7 +102,6 @@ const CategoryManager = () => {
                 }
             })
             .then((response) => {
-                console.log("Categories deleted successfully", response.data);
                 setName('');
                 setEditingId(null);
                 fetchCategories();
@@ -139,7 +134,6 @@ const CategoryManager = () => {
                 }
             })
             .then((response) => {
-                console.log("Categories updated successfully", response.data);
                 setName('');
                 setEditingId(null);
                 fetchCategories();

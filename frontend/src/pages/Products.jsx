@@ -20,7 +20,6 @@ const Products = () => {
                 }
             })
             .then((response) => {
-                console.log("products", response.data.products);
                 setProducts(response.data.products)
             })
             .catch((error) => {
@@ -36,8 +35,6 @@ const Products = () => {
     useEffect(() => {
         if(!token) 
             logout();
-        else 
-            console.log("token:", token);
 
         fetchProducts();
     }, [])

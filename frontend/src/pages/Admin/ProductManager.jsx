@@ -26,7 +26,6 @@ const ProductManager = () => {
                 }
             })
             .then((response) => {
-                console.log("category", response.data.categories);
                 setCategories(response.data.categories)
             })
             .catch((error) => {
@@ -50,7 +49,6 @@ const ProductManager = () => {
                 }
             })
             .then((response) => {
-                console.log("products", response.data.products);
                 setProducts(response.data.products)
             })
             .catch((error) => {
@@ -81,8 +79,6 @@ const ProductManager = () => {
                 }
             })
             .then((response) => {
-                console.log("products added successfully", response.data);
-                alert(response.data.message)
                 setFormData({ name: '', description: '', price: '', quantity: '', category: '', image: ''});
                 setEditingId(null);
                 fetchProducts();
@@ -112,7 +108,6 @@ const ProductManager = () => {
                 }
             })
             .then((response) => {
-                console.log("products deleted successfully", response.data);
                 setFormData({ name: '', description: '', price: '', quantity: '', category: '', image: ''});
                 setEditingId(null);
                 fetchProducts();
@@ -152,7 +147,6 @@ const ProductManager = () => {
                 }
             })
             .then((response) => {
-                console.log("products updated successfully", response.data);
                 setFormData({ name: '', description: '', price: '', quantity: '', category: '', image: ''});
                 setEditingId(null);
                 fetchProducts();
