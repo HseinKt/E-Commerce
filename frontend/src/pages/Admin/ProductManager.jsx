@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import '../../styles/ProductManager.css'
@@ -9,6 +9,7 @@ const ProductManager = () => {
     const [ categories, setCategories ] = useState([]);
     const [ products, setProducts ] = useState([]);
     const [ editingId, setEditingId ] = useState(null);
+    const formRef = useRef(null);
 
     const [ formData, setFormData ] = useState({
         name: '', description: '', price: '', quantity: '', category: '', image: ''
@@ -136,6 +137,8 @@ const ProductManager = () => {
             image: product.image
         });
         setEditingId(product._id);
+        
+        formRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
 
     const handleUpdate = async () => {
@@ -166,10 +169,10 @@ const ProductManager = () => {
 
     return ( 
         <div className="admin-wrapper">
-            <h2>Product Manager</h2>
+            <h2 ref={formRef}>Product Manager</h2>
 
             <div className="admin-manager">
-                <form className="admin-form" id="IDD">
+                <form className="admin-form">
                     <input type="text" name="name" placeholder="Name" required
                         value={formData.name} 
                         onChange={handleChange} 
