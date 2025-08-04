@@ -64,9 +64,9 @@ const Dashboard = () => {
                 </div>
             </div>
 
-            {/* <CategoryManager/> */}
+            <CategoryManager/>
 
-            <ProductManager/>
+            {/* <ProductManager/> */}
         </>
     );
 };
