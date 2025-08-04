@@ -1,6 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import axios from 'axios';
+import ProductManager from './ProductManager';
+import CategoryManager from './CategoryManager';
 import '../../styles/Admin.css'
 
 const Dashboard = () => {
@@ -42,24 +44,30 @@ const Dashboard = () => {
     },[])
     
     return (
-        <div className="admin-wrapper">
-            <h2>Admin Dashboard</h2>
+        <>
+            <div className="admin-wrapper">
+                <h2>Admin Dashboard</h2>
 
-            <div className="admin-grid">
-                <div className="admin-card">
-                    <h3>Total Categories</h3>
-                    <p>{stats.totalCategories}</p>
-                </div>
-                <div className="admin-card">
-                    <h3>Total Products</h3>
-                    <p>{stats.totalProducts}</p>
-                </div>
-                <div className="admin-card">
-                    <h3>Total Stock</h3>
-                    <p>{stats.totalStock}</p>
+                <div className="admin-grid">
+                    <div className="admin-card">
+                        <h3>Total Categories</h3>
+                        <p>{stats.totalCategories}</p>
+                    </div>
+                    <div className="admin-card">
+                        <h3>Total Products</h3>
+                        <p>{stats.totalProducts}</p>
+                    </div>
+                    <div className="admin-card">
+                        <h3>Total Stock</h3>
+                        <p>{stats.totalStock}</p>
+                    </div>
                 </div>
             </div>
-        </div>
+
+            {/* <CategoryManager/> */}
+
+            <ProductManager/>
+        </>
     );
 };
 
