@@ -8,16 +8,11 @@ const ProductManager = () => {
     const { token } = useContext(AuthContext);
     const [ categories, setCategories ] = useState([]);
     const [ products, setProducts ] = useState([]);
+    const [ editingId, setEditingId ] = useState(null);
 
     const [ formData, setFormData ] = useState({
         name: '', description: '', price: '', quantity: '', category: '', image: ''
     })
-    // const [ name, setName ] = useState('');
-    // const [ description, setDescription ] = useState('');
-    // const [ price, setPrice ] = useState('');
-    // const [ quantity, setQuantity ] = useState('');
-    // const [ category, setCategory ] = useState('');
-    // const [ image, setImage ] = useState('');
     
     const fetchCategories = async () => {
         try {
@@ -87,7 +82,8 @@ const ProductManager = () => {
             .then((response) => {
                 console.log("products added successfully", response.data);
                 alert(response.data.message)
-                setFormData({ name: '', description: '', price: '', quantity: '', category: '', image: ''})
+                setFormData({ name: '', description: '', price: '', quantity: '', category: '', image: ''});
+                setEditingId(null);
                 fetchProducts();
             })
             .catch((error) => {
@@ -116,7 +112,8 @@ const ProductManager = () => {
             })
             .then((response) => {
                 console.log("products deleted successfully", response.data);
-                setFormData({ name: '', description: '', price: '', quantity: '', category: '', image: ''})
+                setFormData({ name: '', description: '', price: '', quantity: '', category: '', image: ''});
+                setEditingId(null);
                 fetchProducts();
             })
             .catch((error) => {
@@ -129,8 +126,42 @@ const ProductManager = () => {
         }
     };
 
-    const handleUpdate = async (e) => {
-        
+    const handleEditClick = async (product) => {
+        setFormData({ 
+            name: product.name,
+            description: product.description,
+            price: product.price, 
+            quantity: product.price, 
+            category: product.category?._id, 
+            image: product.image
+        });
+        setEditingId(product._id);
+    }
+
+    const handleUpdate = async () => {
+        try {
+            axios.put(`http://localhost:8000/api/products/${editingId}`, formData,
+            {
+                headers:    
+                {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer '+ token
+                }
+            })
+            .then((response) => {
+                console.log("products updated successfully", response.data);
+                setFormData({ name: '', description: '', price: '', quantity: '', category: '', image: ''});
+                setEditingId(null);
+                fetchProducts();
+            })
+            .catch((error) => {
+                const errorMessage = error.response?.data?.message || "No data updated, catch error";
+                console.log("errorMessage in catch axios", errorMessage);
+                alert( errorMessage);
+            })
+        } catch (error) {
+            console.error("Error during fetching:", error);
+        }
     };
 
     return ( 
@@ -138,7 +169,7 @@ const ProductManager = () => {
             <h2>Product Manager</h2>
 
             <div className="admin-manager">
-                <form onSubmit={handleSubmit} className="admin-form">
+                <form className="admin-form" id="IDD">
                     <input type="text" name="name" placeholder="Name" required
                         value={formData.name} 
                         onChange={handleChange} 
@@ -174,7 +205,12 @@ const ProductManager = () => {
                         onChange={handleChange}
                     />
                     
-                    <button type="submit">Add</button>
+                    {editingId ? (
+                        <button onClick={handleUpdate}>🔄 Update Product</button>
+                    ): (
+                        <button onClick={handleSubmit}>➕ Add Product</button>
+                    )
+                }
                 </form>
 
                 <table className="admin-table">
@@ -192,8 +228,8 @@ const ProductManager = () => {
                     <tbody>
                         {products.map(p => (
                             <tr key={p._id}>
-                                <td>
-                                    <img src={p.image} alt={p.name} />
+                                <td className="img-name-handle">
+                                    <img src={p.image} alt={"hi"} />
                                     <div>{p.name}</div>
                                 </td>
                                 {/* <td>{p.name}</td> */}
@@ -203,7 +239,7 @@ const ProductManager = () => {
                                 <td>{p.category?.name}</td>
                                 <td>
                                     <button onClick={() => handleDelete(p._id)}>🗑</button>
-                                    <button onClick={() => handleUpdate(p._id)}>Edit</button>
+                                    <button onClick={() => handleEditClick(p)}>Edit</button>
                                 </td>
                             </tr>
                         ))}

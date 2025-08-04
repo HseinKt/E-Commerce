@@ -53,6 +53,10 @@ button {
     cursor: pointer;
 }
 
+button:hover {
+    background-color: var(--secondary);
+}
+
 .admin-table {
     width: 100%;
     border-collapse: collapse;
@@ -61,7 +65,7 @@ button {
 
 .admin-table th, .admin-table td {
     border: 0.5px solid var(--neutral);
-    padding: 0.71rem;
+    padding: 0.7rem;
     text-align: center;
 }
 
@@ -70,4 +74,13 @@ button {
     height: 45px;
     object-fit: cover;
     border-radius: 6px;
+}
+
+.admin-table button {
+    margin-inline: 2px;
+}
+
+.img-name-handle {
+    display: flex;
+    flex-wrap: wrap;
 }
