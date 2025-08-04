@@ -1,16 +1,34 @@
 import { useContext, useEffect, useState } from 'react';
-import '../../styles/Admin.css'
 import { AuthContext } from '../../context/AuthContext';
 import axios from 'axios';
+import '../../styles/Admin.css'
 
 const Dashboard = () => {
-    const [stats, setStats] = useState(null);
+    const [stats, setStats] = useState([]);
     const { token, logout } = useContext(AuthContext);
 
     const fetchStats = async () => {
+        
         try {
+            axios.get("http://localhost:8000/api/stats", 
+            {
+                headers:
+                {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer '+ token
+                }
+            })
+            .then((response) => {
+                console.log("fetch Stats", response.data);
+                setStats(response.data)
+            })
+            .catch((error) => {
+                const errorMessage = error.response?.data?.message || "No stats data found, catch error";
+                console.log("errorMessage in catch axios", errorMessage);
+                alert( errorMessage);
+            })
         } catch (error) {
-            
+            console.error("Error during fetching:", error);
         }
     }
 
@@ -29,16 +47,16 @@ const Dashboard = () => {
 
             <div className="admin-grid">
                 <div className="admin-card">
-                    <h3>Total Products</h3>
-                    <p>percentage of products</p>
+                    <h3>Total Categories</h3>
+                    <p>{stats.totalCategories}</p>
                 </div>
                 <div className="admin-card">
-                    <h3>Total Categories</h3>
-                    <p>percentage of categories</p>
+                    <h3>Total Products</h3>
+                    <p>{stats.totalProducts}</p>
                 </div>
                 <div className="admin-card">
                     <h3>Total Stock</h3>
-                    <p>percentage of stocks</p>
+                    <p>{stats.totalStock}</p>
                 </div>
             </div>
         </div>
