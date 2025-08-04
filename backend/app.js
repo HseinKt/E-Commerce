@@ -15,6 +15,9 @@ app.use('/api', productRoutes);
 const categoryRoutes = require('./routes/category.routes');
 app.use('/api', categoryRoutes);
 
+const adminRoutes = require('./routes/admin.routes');
+app.use('/api', adminRoutes);
+
 // Example default route
 app.get('/', (_, res) => {
     res.send('Rooted API Running 🍃');
