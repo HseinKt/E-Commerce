@@ -4,10 +4,12 @@ import axios from 'axios';
 import ProductManager from './ProductManager';
 import CategoryManager from './CategoryManager';
 import '../../styles/Admin.css'
+import { Link, useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
     const [stats, setStats] = useState([]);
     const { token, logout } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const fetchStats = async () => {
         
@@ -43,7 +45,10 @@ const Dashboard = () => {
     return (
         <>
             <div className="admin-wrapper">
-                <h2>Admin Dashboard</h2>
+                <div className='admin-title'>
+                    <h2> Admin Dashboard</h2>
+                    <Link onClick={() => navigate(-1)} className="back">← Back</Link>
+                </div>
 
                 <div className="admin-grid">
                     <div className="admin-card">

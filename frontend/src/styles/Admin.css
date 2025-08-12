@@ -13,6 +13,12 @@
     font-size: 35px;
 }
 
+.admin-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .admin-grid {
     display: flex;
     gap: 1.5rem;
