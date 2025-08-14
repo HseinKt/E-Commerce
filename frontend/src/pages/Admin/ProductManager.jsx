@@ -225,11 +225,10 @@ const ProductManager = () => {
                     <tbody>
                         {products.map(p => (
                             <tr key={p._id}>
-                                <td className="img-name-handle">
-                                    <img src={p.image} alt={"hi"} />
+                                <td className="">
+                                    {/* <img src={p.image} alt={"hi"} /> */}
                                     <div>{p.name}</div>
                                 </td>
-                                {/* <td>{p.name}</td> */}
                                 <td>${p.price}</td>
                                 <td>{p.quantity}</td>
                                 <td>{p.description}</td>
