@@ -10,9 +10,10 @@ const ProductManager = () => {
     const [ products, setProducts ] = useState([]);
     const [ editingId, setEditingId ] = useState(null);
     const formRef = useRef(null);
+    const fileInputRef = useRef(null);
 
     const [ formData, setFormData ] = useState({
-        name: '', description: '', price: '', quantity: '', category: '', image: ''
+        name: '', description: '', price: '', quantity: '', category: '', image: null
     })
     
     const fetchCategories = async () => {
@@ -67,19 +68,33 @@ const ProductManager = () => {
     }, []);
 
     const handleSubmit = async (e) => {
+        console.log("image in handleSubmit ", formData.image);
+
         e.preventDefault();
 
         try {
-            axios.post("http://localhost:8000/api/products", formData,
+            const data = new FormData();
+            data.append('name', formData.name);
+            data.append('description', formData.description);
+            data.append('price', formData.price);
+            data.append('quantity', formData.quantity);
+            data.append('category', formData.category);
+            data.append('image', formData.image); // file object
+
+            // for (let pair of data.entries()) {
+            // console.log(pair[0], pair[1]);
+            // }
+            
+            axios.post("http://localhost:8000/api/products", data,
             {
                 headers:    
                 {
-                    'Content-Type': 'application/json',
                     'Authorization': 'Bearer '+ token
                 }
             })
-            .then((response) => {
-                setFormData({ name: '', description: '', price: '', quantity: '', category: '', image: ''});
+            .then((response) => {                
+                fileInputRef.current && (fileInputRef.current.value = ''); //resets the file input after uploading or submiting
+                setFormData({ name: '', description: '', price: '', quantity: '', category: '', image: null});
                 setEditingId(null);
                 fetchProducts();
             })
@@ -97,6 +112,10 @@ const ProductManager = () => {
         setFormData({...formData, [e.target.name]: e.target.value });
     };
 
+    const handleFile = (e) => {
+        setFormData({...formData, image: e.target.files?.[0] || null });
+    }
+  
     const handleDelete = async (id) => {
         try {
             axios.delete(`http://localhost:8000/api/products/${id}`,
@@ -108,7 +127,7 @@ const ProductManager = () => {
                 }
             })
             .then((response) => {
-                setFormData({ name: '', description: '', price: '', quantity: '', category: '', image: ''});
+                setFormData({ name: '', description: '', price: '', quantity: '', category: '', image: null});
                 setEditingId(null);
                 fetchProducts();
             })
@@ -136,18 +155,32 @@ const ProductManager = () => {
         formRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
 
-    const handleUpdate = async () => {
+    const handleUpdate = async (e) => {
+        e.preventDefault();
+        console.log("image in handleUpdate ", formData.image);
+        
         try {
-            axios.put(`http://localhost:8000/api/products/${editingId}`, formData,
+            const data = new FormData();
+            data.append('name', formData.name);
+            data.append('description', formData.description);
+            data.append('price', formData.price);
+            data.append('quantity', formData.quantity);
+            data.append('category', formData.category);
+
+            if (formData.image instanceof File) { // only append if it's a new file
+                data.append('image', formData.image);
+            }
+
+            axios.put(`http://localhost:8000/api/products/${editingId}`, data,
             {
                 headers:    
                 {
-                    'Content-Type': 'application/json',
                     'Authorization': 'Bearer '+ token
                 }
             })
             .then((response) => {
-                setFormData({ name: '', description: '', price: '', quantity: '', category: '', image: ''});
+                fileInputRef.current && (fileInputRef.current.value = '');
+                setFormData({ name: '', description: '', price: '', quantity: '', category: '', image: null});
                 setEditingId(null);
                 fetchProducts();
             })
@@ -197,9 +230,8 @@ const ProductManager = () => {
                         onChange={handleChange}
                     />
 
-                    <input type="text" name="image" placeholder="image" required
-                        value={formData.image} 
-                        onChange={handleChange}
+                    <input type="file" name="image" required ref={fileInputRef}
+                        onChange={handleFile}
                     />
                     
                     {editingId ? (
@@ -213,7 +245,6 @@ const ProductManager = () => {
                 <table className="admin-table">
                     <thead>
                         <tr>
-                            {/* <th>Preview</th> */}
                             <th>Name</th>
                             <th>Price</th>
                             <th>Qty</th>
@@ -225,8 +256,8 @@ const ProductManager = () => {
                     <tbody>
                         {products.map(p => (
                             <tr key={p._id}>
-                                <td className="">
-                                    {/* <img src={p.image} alt={"hi"} /> */}
+                                <td className="img-name-handle">
+                                    <img src={`http://localhost:8000${p.image}?t=${Date.now()}`} alt={p.name} className="img-name"/>
                                     <div>{p.name}</div>
                                 </td>
                                 <td>${p.price}</td>

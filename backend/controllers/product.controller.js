@@ -41,7 +41,9 @@ exports.getProductById = async (req, res) => {
 exports.createProduct = async (req, res) => {
 
     try {
-        const { name, description, price, quantity, category, image } = req.body;
+        const { name, description, price, quantity, category } = req.body;
+        const imagePath = req.file ? `/uploads/${req.file.filename}` : null;
+        if (!imagePath) return res.status(400).json({ message: 'Image is required' });
 
         const existingCategory = await Category.findById(category);
         if (!existingCategory) return res.status(400).json({
@@ -59,7 +61,7 @@ exports.createProduct = async (req, res) => {
             price,
             quantity,
             category,
-            image
+            image: imagePath
         })
         await newProduct.save();
 
@@ -76,7 +78,8 @@ exports.createProduct = async (req, res) => {
 exports.updateProduct = async (req, res) => {
 
     try {
-        const { name, description, price, quantity, category, image } = req.body;
+        const { name, description, price, quantity, category } = req.body;
+        
         const { id } = req.params;
 
         const product = await Product.findById(id);
@@ -94,7 +97,10 @@ exports.updateProduct = async (req, res) => {
         product.price = price || product.price;
         product.quantity = quantity || product.quantity;
         product.category = category || product.category;
-        product.image = image || product.image;
+
+        if (req.file) {
+            product.image = `/uploads/${req.file.filename}`;
+        }
 
         const updateProduct = await product.save();
 

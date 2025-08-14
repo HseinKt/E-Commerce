@@ -18,6 +18,8 @@ app.use('/api', categoryRoutes);
 const adminRoutes = require('./routes/admin.routes');
 app.use('/api', adminRoutes);
 
+app.use('/uploads', express.static('uploads')); // Make the uploads folder public so images can be accessed
+
 // Example default route
 app.get('/', (_, res) => {
     res.send('Rooted API Running 🍃');

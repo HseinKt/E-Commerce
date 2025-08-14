@@ -42,7 +42,7 @@ const ProductDetails = () => {
             {product && (
                 <div className="details-container">
                     <div className="details-image">
-                        <img src="/src/assets/Nuts1.jpg" alt={product.name} className="image"/>
+                        <img src={`http://localhost:8000${product.image}?t=${Date.now()}`} alt={product.name} className="image"/>
                     </div>
 
                     <div className="details">
