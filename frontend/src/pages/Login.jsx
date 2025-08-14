@@ -7,6 +7,7 @@ const Login = () => {
     const { login } = useContext(AuthContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -21,10 +22,11 @@ const Login = () => {
             .catch((error) => {
                 const errorMessage = error.response?.data?.message || "Login failed. Please try again.";
                 console.error(errorMessage);
+                setError(errorMessage);
             })
         } catch (error) {
             console.error("Error during login:", error);
-            alert("Login failed. Please try again.");
+            setError("Login failed. Please try again.");
         }
     }
 
@@ -58,6 +60,7 @@ const Login = () => {
                             onChange={(e) => setPassword(e.target.value)}
                             required                     
                         />
+                        {error && <p className="error-message">{error}</p>}
                     </div>
                     <button type="submit" className="btn_container">Login</button>
                     <p className="register-login-link">Don't have an account? <a href="/register">Register</a></p>

@@ -54,3 +54,9 @@
   text-align: center;
   margin-top: 20px;
 }
+
+.error-message {
+  color: red;
+  font-size: 0.8rem;
+  margin-block: 5px;
+}

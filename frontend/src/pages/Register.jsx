@@ -10,14 +10,27 @@ const Register = () => {
     const [password, setPassword] = useState("");
     const [role, setRole] = useState("user");
     const [repeat_password, setRepeat_password] = useState("");
+    const [error, setError] = useState("");
+
+    const validatePassword = (pwd) => {
+        const match= /^(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+        return match.test(pwd);
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if(password !== repeat_password) {
-            alert("Passwords do not match!");
+        if (!validatePassword(password)) {
+            setError("Password must be at least 6 characters long and include at least a capital, a lower character, a number & special character.");
             return;
         }
+
+        if(password !== repeat_password) {
+            setError("Passwords do not match!");
+            return;
+        }
+
+        setError("");
 
         const formData = {name, email, password, role};
 
@@ -29,11 +42,11 @@ const Register = () => {
             .catch((error) => {
                 const errorMessage = error.response?.data?.message || "Registration failed. Please try again.";
                 console.error("Register error:", errorMessage);
-                alert(errorMessage);
+                setError(errorMessage);
             })
         } catch (error) {
             console.error("Error during registration:", error);
-            alert("Registration failed. Please try again.");
+            setError("Registration failed. Please try again.");
         }
     }
     return ( 
@@ -92,6 +105,7 @@ const Register = () => {
                             onChange={(e) => setRepeat_password(e.target.value)}
                             required                     
                         />
+                        {error && <p className="error-message">{error}</p>}
                     </div>
                     
                     <button type="submit" className="btn_container">Register</button>
