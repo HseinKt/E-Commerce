@@ -54,7 +54,19 @@
 }
 
 .stars {
-  color: #FFD700;
-  font-size: 1rem;
-  letter-spacing: 2px;
+    color: #FFD700;
+    font-size: 1rem;
+    letter-spacing: 2px;
+}
+
+.category-section {
+    margin-bottom: 2rem;
+}
+
+.category-title {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+    color: var(--primary-color);
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 0.5rem;
 }
