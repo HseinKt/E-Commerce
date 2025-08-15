@@ -73,7 +73,7 @@ button:hover {
     width: 45px;
     height: 45px;
     object-fit: cover;
-    border-radius: 6px;
+    border-radius: 50%;
 }
 
 .admin-table button {

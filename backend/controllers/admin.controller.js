@@ -9,8 +9,6 @@ exports.getStats = async (req, res) => {
         const totalStock = await Product.aggregate([
             { $group: {_id: null, total: { $sum: '$quantity' } } }  //Run an aggregation query and group all documents, then sum the value of quantity across all products
         ])
-
-        console.log("totalStock: ", totalStock[0].total );
         
         res.status(200).json({
             message: 'Stats fetched successfully',
