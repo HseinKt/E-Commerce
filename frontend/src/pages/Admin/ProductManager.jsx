@@ -80,10 +80,6 @@ const ProductManager = () => {
             data.append('quantity', formData.quantity);
             data.append('category', formData.category);
             data.append('image', formData.image); // file object
-
-            // for (let pair of data.entries()) {
-            // console.log(pair[0], pair[1]);
-            // }
             
             axios.post("http://localhost:8000/api/products", data,
             {
@@ -117,27 +113,34 @@ const ProductManager = () => {
     }
   
     const handleDelete = async (id) => {
-        try {
-            axios.delete(`http://localhost:8000/api/products/${id}`,
-            {
-                headers:    
+        const result = window.confirm("Are you sure you want to delete this item?");
+
+        if(result) {
+            try {
+                axios.delete(`http://localhost:8000/api/products/${id}`,
                 {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer '+ token
-                }
-            })
-            .then((response) => {
-                setFormData({ name: '', description: '', price: '', quantity: '', category: '', image: null});
-                setEditingId(null);
-                fetchProducts();
-            })
-            .catch((error) => {
-                const errorMessage = error.response?.data?.message || "No data added, catch error";
-                console.log("errorMessage in catch axios", errorMessage);
-                alert( errorMessage);
-            })
-        } catch (error) {
-            console.error("Error during fetching:", error);
+                    headers:    
+                    {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer '+ token
+                    }
+                })
+                .then((response) => {
+                    setFormData({ name: '', description: '', price: '', quantity: '', category: '', image: null});
+                    setEditingId(null);
+                    fetchProducts();
+                })
+                .catch((error) => {
+                    const errorMessage = error.response?.data?.message || "No data added, catch error";
+                    console.log("errorMessage in catch axios", errorMessage);
+                    alert( errorMessage);
+                })
+            } catch (error) {
+                console.error("Error during fetching:", error);
+            }
+        }
+        else {
+            console.log("Deletion cancelled.");
         }
     };
 
@@ -157,7 +160,6 @@ const ProductManager = () => {
 
     const handleUpdate = async (e) => {
         e.preventDefault();
-        console.log("image in handleUpdate ", formData.image);
         
         try {
             const data = new FormData();

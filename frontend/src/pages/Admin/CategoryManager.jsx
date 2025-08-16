@@ -92,27 +92,34 @@ const CategoryManager = () => {
     }
 
     const handleDelete = async (id) => {
-        try {
-            axios.delete(`http://localhost:8000/api/category/${id}`,
-            {
-                headers:    
+        const result = window.confirm("Are you sure you want to delete this item?");
+
+        if(result){
+            try {
+                axios.delete(`http://localhost:8000/api/category/${id}`,
                 {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer '+ token
-                }
-            })
-            .then((response) => {
-                setName('');
-                setEditingId(null);
-                fetchCategories();
-            })
-            .catch((error) => {
-                const errorMessage = error.response?.data?.message || "No data added, catch error";
-                console.log("errorMessage in catch axios", errorMessage);
-                alert( errorMessage);
-            })
-        } catch (error) {
-            console.error("Error during fetching:", error);
+                    headers:    
+                    {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer '+ token
+                    }
+                })
+                .then((response) => {
+                    setName('');
+                    setEditingId(null);
+                    fetchCategories();
+                })
+                .catch((error) => {
+                    const errorMessage = error.response?.data?.message || "No data added, catch error";
+                    console.log("errorMessage in catch axios", errorMessage);
+                    alert( errorMessage);
+                })
+            } catch (error) {
+                console.error("Error during fetching:", error);
+            }
+        }
+        else {
+            console.log("Deletion cancelled.");
         }
     };
 
