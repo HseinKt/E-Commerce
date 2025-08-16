@@ -15,6 +15,9 @@ const Home = () => {
 
             <Products/>
             
+            <div>
+                <img src="/src/assets/breakfast-table.jpg" alt="image-back" className="image-back"/>
+            </div>
             <Footer/>
         </>
      );
