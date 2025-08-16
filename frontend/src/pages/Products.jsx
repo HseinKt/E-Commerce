@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import '../styles/Products.css'
 
-const Products = () => {
+const Products = ( {productRef} ) => {
     const { token, logout } = useContext(AuthContext);
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
@@ -66,7 +66,7 @@ const Products = () => {
     }, [])
 
     return ( 
-        <div className="product-container">
+        <div ref={productRef} className="product-container">
 
             <h2>Healthy eating</h2>
 

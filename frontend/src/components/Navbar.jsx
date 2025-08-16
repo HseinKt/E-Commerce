@@ -3,7 +3,7 @@ import '../styles/Navbar.css';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 
-const Navbar = () => {
+const Navbar = ({ mainRef, productRef }) => {
     const {user, logout} = useContext(AuthContext);
     const [ scrolled, setScrolled ] = useState(false);
 
@@ -21,14 +21,22 @@ const Navbar = () => {
         return () => window.removeEventListener('scroll', onScroll);
     }, []);
 
+    const handleMainClick = () => {
+        mainRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    const handleProdutClick = () => {
+        productRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+
     return ( 
         <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
             <div className='navbar-content'>
                 <img src="src/assets/logo3.png" alt="Logo" className="logo-image" />
 
                 <div className='links'>
-                    <Link to="/" className={`link ${scrolled ? 'scrolled_link' : ''}`}>Home</Link>
-                    <Link to="/products" className={`link ${scrolled ? 'scrolled_link' : ''}`}>Products</Link>
+                    <Link onClick={() => handleMainClick()} className={`link ${scrolled ? 'scrolled_link' : ''}`}>Home</Link>
+                    <Link onClick={() => handleProdutClick()} className={`link ${scrolled ? 'scrolled_link' : ''}`}>Products</Link>
                 </div>
             </div>
 
