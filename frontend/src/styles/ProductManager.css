@@ -86,3 +86,10 @@ button:hover {
     gap: 1rem;
     align-items: center;
 }
+
+.scrollable-content {
+    max-width: 250px; /* set a fixed width */
+    white-space: nowrap; /* keep text in one line */
+    overflow: hidden; /* hide extra text */
+    text-overflow: ellipsis; /* add "..." */
+}

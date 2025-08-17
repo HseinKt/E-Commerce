@@ -264,7 +264,9 @@ const ProductManager = () => {
                                 </td>
                                 <td>${p.price}</td>
                                 <td>{p.quantity}</td>
-                                <td>{p.description}</td>
+                                <td className="scrollable-content"> 
+                                    {p.description}
+                                </td>
                                 <td>{p.category?.name}</td>
                                 <td>
                                     <button onClick={() => handleDelete(p._id)}>🗑</button>
