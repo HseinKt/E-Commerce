@@ -149,7 +149,7 @@ const ProductManager = () => {
             name: product.name,
             description: product.description,
             price: product.price, 
-            quantity: product.price, 
+            quantity: product.quantity, 
             category: product.category?._id, 
             image: product.image
         });
