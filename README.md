@@ -99,7 +99,6 @@ User:
 <img width="1348" height="643" alt="image" src="https://github.com/user-attachments/assets/8e1b974e-162d-4456-85e5-0ed3a70eea10" />
 <img width="1346" height="466" alt="image" src="https://github.com/user-attachments/assets/09f12fdf-1487-4287-90ee-81cc47f91263" />
 <img width="1341" height="443" alt="image" src="https://github.com/user-attachments/assets/044059ea-7097-4f7b-a1b1-94fa845b6e46" />
-<img width="1341" height="443" alt="image" src="https://github.com/user-attachments/assets/b6b9dae4-0a9e-416e-af33-8a3cd8ef832c" />
 
 ---
 
